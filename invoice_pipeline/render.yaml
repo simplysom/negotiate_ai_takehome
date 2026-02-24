@@ -1,0 +1,34 @@
+services:
+
+  # ── Backend — FastAPI (Python web service) ───────────────────────────────────
+  - type: web
+    name: invoice-pipeline-api
+    runtime: python
+    region: oregon
+    plan: starter
+    rootDir: .
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # set manually in Render dashboard — never commit keys
+      - key: TAVILY_API_KEY
+        sync: false          # optional
+      - key: TAVILY_MCP_URL
+        sync: false          # optional
+      - key: ENABLE_LOOKUP
+        value: "true"
+      - key: ESCALATION_THRESHOLD
+        value: "0.5"
+      - key: LOOKUP_MAX_RESULTS
+        value: "5"
+      - key: PYTHON_VERSION
+        value: "3.13.0"
+
+    # Persistent disk — keeps data/output/ and data/cache/ across deploys
+    disk:
+      name: pipeline-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1

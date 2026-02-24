@@ -1,0 +1,26 @@
+# Core
+anthropic>=0.40.0
+pdfplumber>=0.11.0
+pydantic>=2.0.0
+
+# Web search & scraping for agentic lookup
+tavily-python>=0.7.0   # primary search (set TAVILY_API_KEY in .env)
+ddgs>=9.0.0            # fallback search (no key required)
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# API server (React UI backend)
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# CLI & UI
+click>=8.1.0
+streamlit>=1.40.0
+pandas>=2.0.0
+watchdog>=4.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+rich>=13.0.0
+tenacity>=8.2.0
