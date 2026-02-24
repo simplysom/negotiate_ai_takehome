@@ -5,7 +5,7 @@ services:
     name: invoice-pipeline-api
     runtime: python
     region: oregon
-    plan: starter
+    plan: free
     rootDir: .
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn backend.api:app --host 0.0.0.0 --port $PORT
@@ -27,8 +27,3 @@ services:
       - key: PYTHON_VERSION
         value: "3.13.0"
 
-    # Persistent disk — keeps data/output/ and data/cache/ across deploys
-    disk:
-      name: pipeline-data
-      mountPath: /opt/render/project/src/data
-      sizeGB: 1
